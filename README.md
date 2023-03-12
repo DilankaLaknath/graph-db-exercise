@@ -1,9 +1,10 @@
 # graph-db-exercise
-## UsePlatform - Neo4j
+## Platform - Neo4j Sandbox 
 
 ## Data visualization
+```
  CALL db.schema.visualization()
- 
+ ```
 
 ## Create a graph projection of movies with ratings as:
 ```
