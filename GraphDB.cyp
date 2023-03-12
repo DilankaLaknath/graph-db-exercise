@@ -21,8 +21,8 @@ CALL gds.pageRank.stream('movie', {
 YIELD nodeId, score AS pageRank
 WITH gds.util.asNode(nodeId) AS node, pageRank
 MATCH (node:Movie)-[r:RATED]-()
-RETURN node.title AS movieName, pageRank, count(r) AS interactions
-ORDER BY pageRank DESC LIMIT 10
+RETURN node.title AS movieName, pageRank, count(r) AS ratingcount
+ORDER BY pageRank DESC
 
 
 //Add myself to the database:
@@ -34,12 +34,17 @@ RETURN u
 
 //Add 10 movies that I have seen from the movies that are in the database:
 MATCH (u:User {name: 'Dilanka Wickramasinghe'})
-UNWIND ["Jurassic Park","Batman","Aladdin","Shawshank Redemption, The","Beauty and the Beast","Lion King, The","Braveheart","Terminator 2: Judgment Day","Sherlock: The Abominable Bride","Sherlock Holmes: A Game of Shadows"] AS title
+UNWIND ["Forrest Gump", "Shawshank Redemption, The","Silence of the Lambs, The", "Star Wars: Episode IV - A New Hope", "Matrix, The", "Jurassic Park", "Terminator 2: Judgment Day", "Lord of the Rings: The Fellowship of the Ring, The", "Aladdin", "Godfather, The"] AS title
 MATCH (m:Movie {title: title})
 CREATE (u)-[:RATED {rating: toInteger(rand() * 10)}]->(m)
 WITH u
 MATCH (u)-[r:RATED]->(m:Movie)
 RETURN u.name AS User, m.title AS Movie, r.rating AS Rating
+
+
+//Visualize the output
+MATCH (m:Movie) <- [r:RATED]-(u:User) WHERE u.name = 'Dilanka Wickramasinghe'
+RETURN m,r,u
 
 
 //Run the recommendation result for myself by considering genres
@@ -53,6 +58,7 @@ RETURN rec.title AS recommendation, rec.year AS year, scoreComponents,
 ORDER BY score DESC LIMIT 10
 
 
+
 //Run the Page Rank algorithm and show the results:
 CALL gds.pageRank.stream('movie', {
   maxIterations: 20, //maximum number of iterations the algorithm should run before returning the results
@@ -61,6 +67,6 @@ CALL gds.pageRank.stream('movie', {
 YIELD nodeId, score AS pageRank
 WITH gds.util.asNode(nodeId) AS node, pageRank
 MATCH (node:Movie)-[r:RATED]-()
-RETURN node.title AS movieName, pageRank, count(r) AS interactions
-ORDER BY pageRank DESC LIMIT 10
+RETURN node.title AS movieName, pageRank, count(r) AS ratingcount
+ORDER BY pageRank DESC 
 
