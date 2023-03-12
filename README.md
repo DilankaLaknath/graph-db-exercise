@@ -1,7 +1,8 @@
 # graph-db-exercise
 ## Platform - Neo4j Sandbox 
 
- ![Alt Text](/239187E.mp4)
+[![Alt text](https://img.youtube.com/vi/8Pmma1ulmeg/0.jpg)](https://www.youtube.com/watch?v=8Pmma1ulmeg)
+
 
 ## Data visualization
 ```
