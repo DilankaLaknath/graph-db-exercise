@@ -5,6 +5,8 @@
 ```
  CALL db.schema.visualization()
  ```
+ ![Alt Text](/Images/1.png)
+
 
 ## Create a graph projection of movies with ratings as:
 ```
@@ -17,7 +19,7 @@ YIELD graphName, nodeCount, relationshipCount
 WITH graphName
 MATCH (n) RETURN n LIMIT 50
 ```
-
+ ![Alt Text](/Images/2.png)
 
 ## Run the Page Rank algorithm and show the results:
 ```
@@ -31,7 +33,7 @@ MATCH (node:Movie)-[r:RATED]-()
 RETURN node.title AS movieName, pageRank, count(r) AS ratingcount
 ORDER BY pageRank DESC
 ```
-
+ ![Alt Text](/Images/3.png)
 
 ## Add myself to the database:
 ```
@@ -40,6 +42,7 @@ WITH 1 as dummy
 MATCH (u:User {name: 'Dilanka Wickramasinghe'})
 RETURN u
 ```
+ ![Alt Text](/Images/4.png)
 
 ## Add 10 movies that I have seen from the movies that are in the database:
 ```
@@ -51,14 +54,14 @@ WITH u
 MATCH (u)-[r:RATED]->(m:Movie)
 RETURN u.name AS User, m.title AS Movie, r.rating AS Rating
 ```
-
+ ![Alt Text](/Images/5.png)
 
 ## Visualize the output
 ```
 MATCH (m:Movie) <- [r:RATED]-(u:User) WHERE u.name = 'Dilanka Wickramasinghe'
 RETURN m,r,u
 ```
-
+ ![Alt Text](/Images/6.png)
 
 ## Run the recommendation result for myself by considering genres
 ```
@@ -71,8 +74,7 @@ RETURN rec.title AS recommendation, rec.year AS year, scoreComponents,
        reduce(s=0,x in scoreComponents | s+x[1]) AS score
 ORDER BY score DESC LIMIT 10
 ```
-
-
+ ![Alt Text](/Images/7.png)
 
 ## Run the Page Rank algorithm and show the results:
 ```
@@ -86,3 +88,4 @@ MATCH (node:Movie)-[r:RATED]-()
 RETURN node.title AS movieName, pageRank, count(r) AS ratingcount
 ORDER BY pageRank DESC 
 ```
+ ![Alt Text](/Images/8.png)
