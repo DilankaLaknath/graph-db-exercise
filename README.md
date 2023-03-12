@@ -1,6 +1,8 @@
 # graph-db-exercise
 ## Platform - Neo4j Sandbox 
 
+ ![Alt Text](/239187E.mp4)
+
 ## Data visualization
 ```
  CALL db.schema.visualization()
