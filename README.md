@@ -90,7 +90,7 @@ ORDER BY pageRank DESC
 ```
  ![Alt Text](/Images/8.png)
 
- ## Changed result of the Page Rank algorithm
+ ## Results comparison of the Page Rank algorithm
 
 ![Alt Text](/Images/comparison.png)
 
