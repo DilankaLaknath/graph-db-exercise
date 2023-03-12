@@ -58,7 +58,6 @@ RETURN rec.title AS recommendation, rec.year AS year, scoreComponents,
 ORDER BY score DESC LIMIT 10
 
 
-
 //Run the Page Rank algorithm and show the results:
 CALL gds.pageRank.stream('movie', {
   maxIterations: 20, //maximum number of iterations the algorithm should run before returning the results
@@ -70,3 +69,11 @@ MATCH (node:Movie)-[r:RATED]-()
 RETURN node.title AS movieName, pageRank, count(r) AS ratingcount
 ORDER BY pageRank DESC 
 
+// The PageRank algorithm is solely based on the link structure of the graph when computing PageRank scores. 
+// The influence of new ratings on PageRank scores is determined by the number and quality of pre-existing 
+// links in the graph.
+
+// Here is the analysis of the the top 25 movies 
+
+// The reduction of the PageRank score can be due to the 
+// low quality of new rating links and higher damping factor, which can reduce the impact of new links.
